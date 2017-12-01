@@ -9,7 +9,7 @@ node {
                 dir("sources/${app}") {
                     git url: "https://github.com/${github_user}/${app}"
                     sh "wget https://s3.amazonaws.com/${s3_bucket}/${app}.zip"
-                    sh "unzip -f ${app}.zip"
+                    sh "sudo unzip -f ${app}.zip"
                 }
             }
         }]}
