@@ -1,0 +1,10 @@
+[
+	{
+		RepoName: "aws_anomaly_detection",
+		ShinyName: "anomaly_detection"
+	},
+	{
+		RepoName: "ocean_recognition_app",
+		ShinyName: "ocean_recognition"
+	}
+]
