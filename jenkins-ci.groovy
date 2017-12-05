@@ -9,7 +9,7 @@ node {
                 dir("sources/${app}") {
                     git url: "https://github.com/${github_user}/${app}"
                     sh "wget https://s3.amazonaws.com/${s3_bucket}/${app}.zip"
-                    sh "sudo unzip -f ${app}.zip"
+                    sh "unzip -f ${app}.zip"
                 }
             }
         }]}
@@ -30,7 +30,7 @@ node {
         parallel app_names.collectEntries {app -> [app, {
             node {
                 dir("build/${app}") {
-                    sh "docker run --rm -d -p ${app_port}:3838 ${app}"
+                    sh "docker run --rm -d -m 2g -p ${app_port}:3838 ${app}"
                 }
             }
             app_port += 1
