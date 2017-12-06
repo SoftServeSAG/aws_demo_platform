@@ -8,8 +8,9 @@ node {
             node {
                 dir("sources/${app}") {
                     git url: "https://github.com/${github_user}/${app}"
-                    sh "wget https://s3.amazonaws.com/${s3_bucket}/${app}.zip"
-                    sh "unzip -f ${app}.zip"
+                    sh "wget -q https://s3.amazonaws.com/${s3_bucket}/${app}.zip"
+                    sh "unzip -o ${app}.zip"
+                    sh "rm ${app}.zip"
                 }
             }
         }]}
@@ -20,17 +21,17 @@ node {
                 dir("sources/${app}") {
                     sh "docker build --rm --force-rm -t ${app} ."
                 }
-                dir("build/${app}") {
-                    sh "docker save -o ${app}.image ${app}"
-                }
+                // dir("build/${app}") {
+                //     sh "docker save -o ${app}.image ${app}"
+                // }
             }
         }]}
     }
     stage('Deploy') {
         parallel app_names.collectEntries {app -> [app, {
             node {
-                dir("build/${app}") {
-                    sh "docker run --rm -d -m 2g -p ${app_port}:3838 ${app}"
+                dir("sources/${app}") {
+                    sh "sh dockerRun.sh ${app} ${app_port}"
                 }
             }
             app_port += 1
