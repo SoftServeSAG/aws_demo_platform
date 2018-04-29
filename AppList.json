@@ -6,5 +6,9 @@
 	{
 		RepoName: "ocean_recognition_app",
 		ShinyName: "ocean_recognition"
+	},
+	{
+		RepoName: "scorecard_builder_app",
+		ShinyName: "scorecard_builder_app"
 	}
 ]
