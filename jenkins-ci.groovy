@@ -1,6 +1,6 @@
 node {
     def github_user = "SoftServeSAG"
-    def app_names = ["aws_anomaly_detection", "scorecard_builder_app", "customer_product_analytics"]
+    def app_names = ["aws_anomaly_detection", "scorecard_builder_app", "customer_product_analytics", "retail_price_analytic"]
     def s3_bucket = "softserve-ai"
     def app_port = 3340
     stage('Extract') {
