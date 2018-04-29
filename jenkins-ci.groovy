@@ -1,6 +1,6 @@
 node {
     def github_user = "SoftServeSAG"
-    def app_names = ["aws_anomaly_detection", "ocean_recognition_app"]
+    def app_names = ["aws_anomaly_detection", "ocean_recognition_app”, “scorecard_builder_app”]
     def s3_bucket = "softserve-analytics"
     def app_port = 3340
     stage('Extract') {
@@ -30,9 +30,9 @@ node {
     stage('Deploy') {
         parallel app_names.collectEntries {app -> [app, {
             node {
-                dir("sources/${app}") {
-                    sh "sh dockerRun.sh ${app} ${app_port}"
-                }
+                // dir("sources/${app}") {
+                //     sh "sh dockerRun.sh ${app} ${app_port}"
+                // }
             }
             app_port += 1
         }]}
